@@ -1,0 +1,4 @@
+[dotenv@17.3.1] injecting env (11) from .env -- tip: ⚡️ secrets for agents: https://dotenvx.com/as2
+server listening at : http://localhost:5000
+✅ PostgreSQL Database connected successfully
+✅ PostgreSQL Database connected successfully
