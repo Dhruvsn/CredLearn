@@ -16,7 +16,7 @@ The blockchain system is designed to:
 # 🧱 High-Level Architecture
 
 ## 🔗 Contract Interaction Flow
-![Architecture Diagram for CredLearn's Blockchain](./assets/CredLearn - Blockchain Architecture.png "Architecture Diagram for CredLearn's Blockchain")
+![Alt text](./assets/CredLearn-BlockchainArchitecture.png)
 
 ---
 
