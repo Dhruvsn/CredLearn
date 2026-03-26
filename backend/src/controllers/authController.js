@@ -1,6 +1,11 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { createUser, getUserByEmail } = require("../models/userModel.js");
+const {
+  createUser,
+  getUserByEmail,
+  saveRefreshToken,
+} = require("../models/userModel.js");
+const { generateToken, generateRefreshToken } = require("../utils/tokens.js");
 
 async function register(req, res) {
   const { username, email, password } = req.body;
@@ -53,13 +58,10 @@ async function login(req, res) {
       });
     }
 
-    const token = jwt.sign(
-      { id: user.id, email: user.email },
-      process.env.JWT_ACCESS_SECRET,
-      {
-        expiresIn: "1h",
-      },
-    );
+    const token = generateToken(user);
+    const refresh_token = generateRefreshToken(user);
+
+    await saveRefreshToken(refresh_token, user);
 
     const options = {
       httpOnly: true,
@@ -70,6 +72,8 @@ async function login(req, res) {
     res.status(200).json({
       success: true,
       token,
+      refresh_token,
+      user,
       message: "User login successfully!",
     });
   } catch (err) {
@@ -80,7 +84,40 @@ async function login(req, res) {
   }
 }
 
+async function refreshToken(req, res) {
+  const { refreshToken } =
+    req.body || req.cookies.token || req.headers.authorization?.split(" ")[1];
+
+  if (!refreshToken) {
+    return res.status(400).json({
+      message: "Refresh token is required!",
+    });
+  }
+
+  try {
+    const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
+    const user = await getUserByEmail(decoded.email);
+
+    if (!user || user.refresh_token !== refreshToken) {
+      return res.status(401).json({
+        message: "Invalid refresh token!",
+      });
+    }
+
+    const newToken = generateToken(user);
+
+    res.status(200).json({
+      token: newToken,
+    });
+  } catch (error) {
+    return res.status(401).json({
+      message: "Internal Server Error",
+    });
+  }
+}
+
 module.exports = {
   register,
   login,
+  refreshToken,
 };

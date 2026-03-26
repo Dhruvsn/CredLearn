@@ -7,7 +7,9 @@ app.use(cors());
 app.use(cookieParser());
 
 const authRoutes = require("./routes/authRoutes.js");
+const userRoutes = require("./routes/userRoutes.js");
 
 app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
 
 module.exports = app;

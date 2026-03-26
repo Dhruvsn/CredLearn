@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { register, login } = require("../controllers/authController.js");
+const {
+  register,
+  login,
+  refreshToken,
+} = require("../controllers/authController.js");
 const {
   validate,
   userValidationRules,
@@ -8,5 +12,6 @@ const {
 
 router.post("/register", userValidationRules, validate, register);
 router.post("/login", login);
+router.post("/refresh-token", refreshToken);
 
 module.exports = router;
