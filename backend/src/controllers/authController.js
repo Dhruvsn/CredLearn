@@ -7,6 +7,7 @@ const {
 } = require("../models/userModel.js");
 const { generateToken, generateRefreshToken } = require("../utils/tokens.js");
 
+// register endpoint to create new user and store password hash in database
 async function register(req, res) {
   const { username, email, password } = req.body;
 
@@ -33,6 +34,7 @@ async function register(req, res) {
   }
 }
 
+// login endpoint to authenticate user and generate access token and refresh token
 async function login(req, res) {
   const { email, password } = req.body;
 
@@ -84,6 +86,7 @@ async function login(req, res) {
   }
 }
 
+// refresh token endpoint to generate new access token using refresh token
 async function refreshToken(req, res) {
   const { refreshToken } =
     req.body || req.cookies.token || req.headers.authorization?.split(" ")[1];
