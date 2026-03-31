@@ -1,29 +1,42 @@
 const multer = require("multer");
+const path = require("path");
+const fs = require("fs");
 
-// we use memory storage so the file is kept as a buffer in memory.
+// 1. Safety Check: Ensure the uploads folder actually exists, or create it.
+const uploadDirectory = path.join(__dirname, "../public/uploads");
+if (!fs.existsSync(uploadDirectory)) {
+  fs.mkdirSync(uploadDirectory, { recursive: true });
+}
 
+// 2. Configure Disk Storage
 const storage = multer.diskStorage({
-  destination: function (req, file, db) {
-    db(null, "../../public/uploads");
+  destination: function (req, file, cb) {
+    // 'cb' is the standard naming convention for callbacks
+    cb(null, uploadDirectory);
   },
-  filename: function (req, file, db) {
-    db(null, file.originalname);
+  filename: function (req, file, cb) {
+    // Fix for the Overwrite Bug: Attach a timestamp so names are always unique
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    const extension = path.extname(file.originalname);
+    const baseName = path.basename(file.originalname, extension);
+    
+    cb(null, `${baseName}-${uniqueSuffix}${extension}`);
   },
 });
 
-// creat the upload middleware
-
+// 3. Create the upload middleware
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: 1000 * 1024 * 1024, // limit file size to 1000MB
+    // Keeping this at 100MB for testing to prevent accidental local storage bloat
+    fileSize: 100 * 1024 * 1024, 
   },
-  fileFilter: function (req, file, db) {
-    // only accept video files
+  fileFilter: function (req, file, cb) {
+    // Only accept video files
     if (file.mimetype.startsWith("video/")) {
-      db(null, true);
+      cb(null, true);
     } else {
-      db(new Error("Invalid file type, only video files are allowed"), false);
+      cb(new Error("Invalid file type, only video files are allowed"), false);
     }
   },
 });
