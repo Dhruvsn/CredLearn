@@ -38,6 +38,12 @@ async function getUserTransaction(req, res) {
   }
 }
 
+async function uploadVideo(req, res) {
+  console.log("this is upload video controller");
+}
+
 module.exports = {
   getUserTransaction,
+  uploadVideo,
 };
+
