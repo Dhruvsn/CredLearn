@@ -22,17 +22,6 @@ async function getUserByEmail(email) {
   return result.rows[0];
 }
 
-async function fetchUserTransaction(id) {
-  const result = await db.query(
-    `
-    SELECT * FROM Transaction WHERE sender_id = $1 OR receiver_id = $1
-    `,
-    [id],
-  );
-
-  return result.rows;
-}
-
 async function saveRefreshToken(refresh_token, user) {
   await db.query(
     `
@@ -42,9 +31,31 @@ async function saveRefreshToken(refresh_token, user) {
   );
 }
 
+async function fetchUserTransaction(id) {
+  const result = await db.query(
+    `SELECT * FROM transactions WHERE sender_id = $1 OR receiver_id = $1 ORDER BY created_at DESC`,
+    [id],
+  );
+  return result.rows; // Return the full array of history
+}
+
+async function updateTransactionStatus(sessionId, status) {
+  const result = await db.query(
+    `UPDATE transactions SET status = $1 WHERE id = $2 RETURNING *`,
+    [status, sessionId],
+  );
+  return result.rows[0];
+}
+
+module.exports = {
+  fetchUserTransaction,
+  updateTransactionStatus,
+};
+
 module.exports = {
   createUser,
   getUserByEmail,
   fetchUserTransaction,
   saveRefreshToken,
+  updateTransactionStatus,
 };

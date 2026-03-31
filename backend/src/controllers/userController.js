@@ -2,7 +2,7 @@ const validator = require("validator");
 const { fetchUserTransaction } = require("../models/userModel");
 
 async function getUserTransaction(req, res) {
-  const { id } = req.params;
+  const { id } = req.params.id;
   console.log("User ID: ", id);
   if (!validator.isUUID(id)) {
     return res.status(400).json({
