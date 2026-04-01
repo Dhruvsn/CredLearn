@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const verfiyToken = async (req, res, next) => {
+const verifyToken = async (req, res, next) => {
   const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
 
   if (!token) {
@@ -14,15 +14,17 @@ const verfiyToken = async (req, res, next) => {
 
     if (!decoded) {
       return res.status(401).json({
-        user: "user not found!",
+        message: "user not found!",
       });
     }
 
     req.user = decoded;
     next();
   } catch (err) {
-    next(err);
+    return res.status(401).json({
+      message: "Invalid or expired token",
+    });
   }
 };
 
-module.exports = verfiyToken;
+module.exports = verifyToken;

@@ -89,8 +89,8 @@ async function login(req, res) {
 
 // refresh token endpoint to generate new access token using refresh token
 async function refreshToken(req, res) {
-  const { refreshToken } =
-    req.body || req.cookies.token || req.headers.authorization?.split(" ")[1];
+  const refreshToken =
+    req.body?.refreshToken || req.cookies?.refresh_token || req.headers.authorization?.split(" ")[1];
 
   if (!refreshToken) {
     return res.status(400).json({

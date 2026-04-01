@@ -48,11 +48,6 @@ async function updateTransactionStatus(sessionId, status) {
 }
 
 module.exports = {
-  fetchUserTransaction,
-  updateTransactionStatus,
-};
-
-module.exports = {
   createUser,
   getUserByEmail,
   fetchUserTransaction,
