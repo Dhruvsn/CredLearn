@@ -1,0 +1,146 @@
+.page { display: flex; flex-direction: column; min-height: 100vh; }
+.main {
+  flex: 1; padding: 36px 32px;
+  max-width: 1100px; margin: 0 auto; width: 100%;
+}
+
+/* ── Header ─────────────────────────────── */
+.header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  flex-wrap: wrap; gap: 14px; margin-bottom: 28px;
+}
+.title {
+  font-family: var(--serif); font-size: 28px; font-weight: 400;
+  color: var(--text); letter-spacing: -0.3px; line-height: 1.2; margin-bottom: 5px;
+}
+.title em { color: var(--accent); font-style: italic; }
+.sub { font-size: 13.5px; color: var(--text2); }
+
+.demoBanner {
+  display: flex; align-items: center; gap: 7px;
+  background: var(--amberdim); border: 1px solid rgba(240,196,90,0.18);
+  border-radius: 20px; padding: 6px 14px;
+  font-size: 12px; color: var(--amber);
+  font-family: var(--mono);
+}
+.demoDot { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); flex-shrink: 0; }
+
+/* ── Stats ──────────────────────────────── */
+.statsGrid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 12px; margin-bottom: 20px;
+}
+.statCard {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--r2); padding: 18px 20px;
+  position: relative; overflow: hidden;
+}
+.statCard::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+}
+.stat_green::before { background: var(--accent); }
+.stat_blue::before  { background: var(--blue); }
+.stat_gray::before  { background: var(--border3); }
+
+.statLabel { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+.statValue { font-family: var(--mono); font-size: 22px; font-weight: 500; color: var(--text); }
+.statVal_green { color: var(--accent); }
+.statVal_blue  { color: var(--blue); }
+.statUnit  { font-size: 11.5px; color: var(--text3); margin-top: 4px; }
+
+/* ── Main Grid ──────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 14px;
+}
+
+/* ── Shared card label ──────────────────── */
+.cardLabel {
+  font-size: 11px; font-weight: 600; color: var(--text3);
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+.cardHeader {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+/* ── Contracts ──────────────────────────── */
+.contractsCard { grid-column: 1; }
+.contractList { display: flex; flex-direction: column; gap: 8px; }
+.contractRow {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 11px 13px;
+}
+.contractIcon {
+  width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+}
+.cicon_accent { background: var(--accentdim); border: 1px solid var(--accentring); color: var(--accent); }
+.cicon_blue   { background: var(--bluedim);   border: 1px solid rgba(90,171,240,0.2); color: var(--blue); }
+.cicon_amber  { background: var(--amberdim);  border: 1px solid rgba(240,196,90,0.2); color: var(--amber); }
+.contractInfo { flex: 1; min-width: 0; }
+.contractName { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 1px; }
+.contractDesc { font-size: 11px; color: var(--text3); }
+
+/* ── Wallet ─────────────────────────────── */
+.walletCard { grid-column: 2; }
+.walletConnected { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.walletAvatar {
+  width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+  background: var(--accentdim); border: 1px solid var(--accentring);
+  display: flex; align-items: center; justify-content: center;
+}
+.walletLabel { font-size: 11.5px; color: var(--accent); font-weight: 500; margin-bottom: 3px; }
+.walletAddr  { font-family: var(--mono); font-size: 12px; color: var(--text2); word-break: break-all; }
+.walletNote  { font-size: 12px; color: var(--text3); margin-top: 12px; line-height: 1.55; }
+
+/* ── Escrow ─────────────────────────────── */
+.escrowCard { grid-column: 1 / -1; }
+.escrowLayout {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
+  align-items: start;
+}
+.escrowForm { display: flex; flex-direction: column; gap: 12px; }
+.escrowField { display: flex; flex-direction: column; gap: 5px; }
+.escrowLabel { font-size: 11.5px; font-weight: 500; color: var(--text2); }
+.escrowInput {
+  background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: var(--r); padding: 9px 12px; color: var(--text);
+  font-size: 13.5px; outline: none; width: 100%; font-family: var(--sans);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.escrowInput:focus { border-color: var(--accentring); box-shadow: 0 0 0 3px rgba(138,237,98,0.06); }
+.escrowInput::placeholder { color: var(--text3); }
+/* hide number arrows */
+.escrowInput[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+.escrowSteps { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.escrowStep {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 10px 13px;
+  font-size: 12.5px; color: var(--text2); line-height: 1.5;
+}
+.stepNum {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--accentdim); border: 1px solid var(--accentring);
+  color: var(--accent); font-size: 10px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px; font-family: var(--mono);
+}
+
+/* ── Responsive ─────────────────────────── */
+@media (max-width: 800px) {
+  .main { padding: 24px 16px; }
+  .statsGrid { grid-template-columns: 1fr 1fr; }
+  .grid { grid-template-columns: 1fr; }
+  .contractsCard, .walletCard, .escrowCard { grid-column: 1; }
+  .escrowLayout { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .statsGrid { grid-template-columns: 1fr; }
+}

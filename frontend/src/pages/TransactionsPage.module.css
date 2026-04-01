@@ -1,0 +1,100 @@
+.page { display: flex; flex-direction: column; min-height: 100vh; }
+.main {
+  flex: 1; padding: 36px 32px;
+  max-width: 1100px; margin: 0 auto; width: 100%;
+}
+
+/* ── Header ─────────────────────────────── */
+.header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px; margin-bottom: 24px;
+}
+.title {
+  font-family: var(--serif); font-size: 28px; font-weight: 400;
+  color: var(--text); letter-spacing: -0.3px; margin-bottom: 4px;
+}
+.sub { font-size: 13.5px; color: var(--text2); }
+
+/* ── Summary ────────────────────────────── */
+.summary {
+  display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px;
+}
+.chip {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--r2); padding: 12px 18px; flex: 1; min-width: 140px;
+}
+.chip_green { border-left: 2px solid var(--accent); }
+.chip_red   { border-left: 2px solid var(--red); }
+.chip_gray  { border-left: 2px solid var(--border3); }
+.chipLabel  { font-size: 10.5px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 6px; }
+.chipValue  { font-family: var(--mono); font-size: 17px; font-weight: 500; color: var(--text); }
+.chip_green .chipValue { color: var(--accent); }
+.chip_red   .chipValue { color: var(--red); }
+
+/* ── Table card ─────────────────────────── */
+.tableCard {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--r2); overflow: hidden;
+}
+
+/* ── Table ───────────────────────────────── */
+.table { width: 100%; border-collapse: collapse; }
+.table thead tr {
+  background: var(--bg3); border-bottom: 1px solid var(--border);
+}
+.table th {
+  padding: 11px 18px; text-align: left;
+  font-size: 10.5px; font-weight: 600; color: var(--text3);
+  text-transform: uppercase; letter-spacing: 0.07em;
+  white-space: nowrap;
+}
+.table td { padding: 13px 18px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.row:last-child td { border-bottom: none; }
+.row:hover td { background: rgba(255,255,255,0.012); }
+
+.date { font-size: 13px; color: var(--text); font-family: var(--mono); }
+.time { font-size: 11px; color: var(--text3); font-family: var(--mono); }
+
+.typeBadge {
+  display: inline-flex; padding: 3px 9px; border-radius: 20px;
+  font-size: 11px; font-weight: 500; font-family: var(--mono);
+}
+.typeSent { background: var(--reddim);    color: var(--red);    border: 1px solid rgba(240,90,90,0.15); }
+.typeRecv { background: var(--accentdim); color: var(--accent); border: 1px solid var(--accentring); }
+
+.peer  { font-family: var(--mono); font-size: 12px; color: var(--text2); }
+
+.amount { font-family: var(--mono); font-size: 13px; font-weight: 500; }
+.amountSent { color: var(--red); }
+.amountRecv { color: var(--accent); }
+
+.hash {
+  font-family: var(--mono); font-size: 11px; color: var(--text3);
+  cursor: default;
+}
+.hash:hover { color: var(--text2); }
+
+/* ── Empty ───────────────────────────────── */
+.empty {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 60px 24px; text-align: center;
+}
+.emptyIcon  { font-size: 30px; opacity: 0.3; margin-bottom: 12px; }
+.emptyTitle { font-size: 14px; color: var(--text2); font-weight: 500; margin-bottom: 5px; }
+.emptySub   { font-size: 12.5px; color: var(--text3); }
+
+/* ── Skeleton ────────────────────────────── */
+.skeletonWrap { display: flex; flex-direction: column; }
+.skeletonRow {
+  display: flex; gap: 32px; align-items: center;
+  padding: 16px 18px; border-bottom: 1px solid var(--border);
+}
+.skeletonRow:last-child { border-bottom: none; }
+
+/* ── Responsive ─────────────────────────── */
+@media (max-width: 700px) {
+  .main { padding: 24px 16px; }
+  .table th:nth-child(3), .table td:nth-child(3),
+  .table th:nth-child(5), .table td:nth-child(5) { display: none; }
+  .chip { min-width: 100px; }
+}

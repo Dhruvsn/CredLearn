@@ -1,0 +1,118 @@
+/* ── Button ────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 9px 18px; border-radius: var(--r); font-size: 13.5px; font-weight: 500;
+  border: none; outline: none; transition: all 0.15s; line-height: 1;
+  white-space: nowrap;
+}
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn:active:not(:disabled) { transform: scale(0.97); }
+.fullWidth { width: 100%; }
+
+.btn_primary {
+  background: var(--accent); color: #070a06;
+}
+.btn_primary:hover:not(:disabled) { background: var(--accent2); }
+
+.btn_ghost {
+  background: transparent; color: var(--text2);
+  border: 1px solid var(--border2);
+}
+.btn_ghost:hover:not(:disabled) { background: var(--bg3); color: var(--text); border-color: var(--border3); }
+
+.btn_outline {
+  background: transparent; color: var(--accent);
+  border: 1px solid var(--accentring);
+}
+.btn_outline:hover:not(:disabled) { background: var(--accentdim); }
+
+.btn_danger {
+  background: transparent; color: var(--red);
+  border: 1px solid rgba(240,90,90,0.2);
+}
+.btn_danger:hover:not(:disabled) { background: var(--reddim); }
+
+.btnSpinner {
+  width: 12px; height: 12px; flex-shrink: 0;
+  border: 1.5px solid rgba(0,0,0,0.25); border-top-color: rgba(0,0,0,0.7);
+  border-radius: 50%; animation: spin 0.55s linear infinite;
+}
+.btn_ghost .btnSpinner, .btn_outline .btnSpinner {
+  border: 1.5px solid var(--border3); border-top-color: var(--accent);
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Field / Input ──────────────────────────────── */
+.field { display: flex; flex-direction: column; gap: 5px; }
+.label { font-size: 11.5px; font-weight: 500; color: var(--text2); letter-spacing: 0.02em; }
+
+.input {
+  background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: var(--r); padding: 9px 13px;
+  color: var(--text); font-size: 14px; outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  width: 100%;
+}
+.input:focus {
+  border-color: var(--accentring);
+  box-shadow: 0 0 0 3px rgba(138,237,98,0.06);
+}
+.input::placeholder { color: var(--text3); }
+.inputError { border-color: rgba(240,90,90,0.4) !important; }
+.fieldError { font-size: 11.5px; color: var(--red); }
+
+/* ── Card ─────────────────────────────────────── */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 24px;
+}
+
+/* ── Badge ────────────────────────────────────── */
+.badge {
+  display: inline-flex; align-items: center;
+  padding: 2px 9px; border-radius: 20px;
+  font-size: 11px; font-weight: 500; font-family: var(--mono);
+}
+.badge_accent { background: var(--accentdim); color: var(--accent); border: 1px solid var(--accentring); }
+.badge_blue   { background: var(--bluedim);   color: var(--blue);   border: 1px solid rgba(90,171,240,0.2); }
+.badge_amber  { background: var(--amberdim);  color: var(--amber);  border: 1px solid rgba(240,196,90,0.2); }
+.badge_red    { background: var(--reddim);    color: var(--red);    border: 1px solid rgba(240,90,90,0.2); }
+.badge_gray   { background: var(--bg4);       color: var(--text2);  border: 1px solid var(--border2); }
+
+/* ── Toast ────────────────────────────────────── */
+.toast {
+  position: fixed; bottom: 24px; right: 24px; z-index: 1000;
+  display: flex; align-items: center; gap: 9px;
+  background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: var(--r2); padding: 11px 16px;
+  font-size: 13px; color: var(--text); max-width: 320px;
+  animation: toastIn 0.3s cubic-bezier(0.16,1,0.3,1) both;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.toast_success { border-color: var(--accentring); }
+.toast_error   { border-color: rgba(240,90,90,0.25); }
+.toastDot {
+  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+  background: var(--text3);
+}
+.toast_success .toastDot { background: var(--accent); animation: pulse 2s ease infinite; }
+.toast_error   .toastDot { background: var(--red); }
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:0.4; transform:scale(0.8); }
+}
+
+/* ── Divider ─────────────────────────────────── */
+.divider {
+  border: none; border-top: 1px solid var(--border); flex: 1;
+}
+.dividerLabel {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 11.5px; color: var(--text3); white-space: nowrap;
+}

@@ -1,0 +1,125 @@
+.page {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  background: var(--bg);
+  position: relative; overflow: hidden;
+}
+
+/* Subtle dot-grid background */
+.grid {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 100%);
+}
+
+.layout {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; flex: 1; min-height: 100vh;
+  max-width: 1080px; margin: 0 auto; width: 100%;
+  padding: 0 32px;
+  align-items: center;
+}
+
+/* ── Hero ─────────────────────────────────── */
+.hero { padding: 60px 48px 60px 0; }
+.heroInner { max-width: 440px; }
+
+.logotype {
+  display: flex; align-items: center; gap: 9px;
+  font-family: var(--serif); font-size: 17px; color: var(--accent);
+  margin-bottom: 28px;
+}
+.dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:0.5; transform:scale(0.8); }
+}
+
+.headline {
+  font-family: var(--serif);
+  font-size: clamp(34px, 4.5vw, 52px);
+  font-weight: 400; line-height: 1.12;
+  color: var(--text); letter-spacing: -0.4px;
+  margin-bottom: 18px;
+}
+.headline em { color: var(--accent); font-style: italic; }
+
+.sub {
+  font-size: 14.5px; color: var(--text2); line-height: 1.7;
+  margin-bottom: 28px; max-width: 360px;
+}
+
+.features { list-style: none; margin-bottom: 28px; }
+.feature {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13px; color: var(--text2); padding: 5px 0;
+}
+.ficon { color: var(--accent); font-size: 11px; margin-top: 2px; flex-shrink: 0; opacity: 0.7; }
+
+.contractPills { display: flex; gap: 8px; flex-wrap: wrap; }
+.pill {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--bg3); border: 1px solid var(--border2);
+  border-radius: 20px; padding: 4px 12px;
+  font-family: var(--mono); font-size: 11px; color: var(--text2);
+}
+.pillDot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+/* ── Form ────────────────────────────────────── */
+.formWrap {
+  display: flex; align-items: center; justify-content: center;
+  padding: 60px 0;
+}
+
+.formCard {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r3);
+  padding: 28px;
+  width: 100%; max-width: 380px;
+}
+
+.tabs {
+  display: flex; background: var(--bg3); border-radius: 10px;
+  padding: 3px; margin-bottom: 22px; gap: 2px;
+}
+.tab {
+  flex: 1; padding: 8px; text-align: center;
+  font-size: 13px; font-weight: 500; border-radius: 8px;
+  cursor: pointer; color: var(--text3);
+  background: none; border: none;
+  transition: all 0.15s;
+}
+.tab:hover { color: var(--text2); }
+.tabActive {
+  background: var(--bg2) !important; color: var(--text) !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+
+.form { display: flex; flex-direction: column; gap: 13px; margin-bottom: 16px; }
+
+.demoRow {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  margin-top: 14px;
+  font-size: 12px; color: var(--text3);
+}
+.demoBtn {
+  background: none; border: none; color: var(--accent);
+  font-size: 12px; cursor: pointer; padding: 0;
+  transition: opacity 0.15s;
+}
+.demoBtn:hover { opacity: 0.75; }
+
+/* ── Responsive ─────────────────────────────────── */
+@media (max-width: 760px) {
+  .layout { grid-template-columns: 1fr; padding: 0 20px; }
+  .hero { display: none; }
+  .formWrap { padding: 40px 0; min-height: 100vh; }
+  .formCard { max-width: 100%; }
+}
