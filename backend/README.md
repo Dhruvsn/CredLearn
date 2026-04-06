@@ -44,7 +44,7 @@ JWT_ACCESS_SECRET=your_jwt_access_secret
 JWT_REFRESH_SECRET=your_jwt_refresh_secret
 JWT_REFRESH_EXPIRATION=1d
 
-DB_USER=batman
+DB_USER="username"
 DB_HOST=localhost
 DB_NAME=credlearn
 DB_PASSWORD=password
